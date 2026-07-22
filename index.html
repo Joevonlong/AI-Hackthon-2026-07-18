@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Visibel — From zero to hero.</title>
+<meta name="description" content="Visibel audits how customers actually see a local business online — website, Google Maps, listings — then rewrites and re-illustrates it in one click." />
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+<style>
+  :root{
+    --bg:#faf8f4;
+    --bg-alt:#f1ede4;
+    --ink:#141310;
+    --ink-soft:#57544c;
+    --line:#e4ddd0;
+    --accent:#b5502e;
+    --accent-ink:#faf8f4;
+    --card:#ffffff;
+    --shadow: 0 1px 2px rgba(20,19,16,0.04), 0 10px 30px -12px rgba(20,19,16,0.12);
+    --radius: 18px;
+    --wordmark: url('assets/wordmark-light.svg');
+  }
+  :root[data-theme="dark"]{
+    --bg:#141310;
+    --bg-alt:#1c1a15;
+    --ink:#faf8f4;
+    --ink-soft:#b9b3a5;
+    --line:#332f26;
+    --accent:#e2724a;
+    --accent-ink:#141310;
+    --card:#1c1a15;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 10px 30px -12px rgba(0,0,0,0.5);
+    --wordmark: url('assets/wordmark-dark.svg');
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#141310;
+      --bg-alt:#1c1a15;
+      --ink:#faf8f4;
+      --ink-soft:#b9b3a5;
+      --line:#332f26;
+      --accent:#e2724a;
+      --accent-ink:#141310;
+      --card:#1c1a15;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 10px 30px -12px rgba(0,0,0,0.5);
+      --wordmark: url('assets/wordmark-dark.svg');
+    }
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:-apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    line-height:1.5;
+    overflow-x:hidden;
+  }
+  a{color:inherit;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 24px;}
+
+  /* nav */
+  header.nav{
+    position:sticky; top:0; z-index:20;
+    background:color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{display:flex; align-items:center; justify-content:space-between; padding:16px 24px; max-width:1120px; margin:0 auto;}
+  .logo{width:132px; height:30px; background:var(--wordmark) no-repeat left center / contain;}
+  nav.links{display:flex; gap:28px; font-size:14.5px; font-weight:500;}
+  nav.links a{text-decoration:none; color:var(--ink-soft); transition:color .15s;}
+  nav.links a:hover{color:var(--ink);}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:11px 20px; border-radius:999px; font-weight:600; font-size:14.5px;
+    text-decoration:none; border:1px solid transparent; white-space:nowrap;
+    transition:transform .15s ease, opacity .15s ease;
+  }
+  .btn:active{transform:scale(0.97);}
+  .btn-primary{background:var(--ink); color:var(--bg);}
+  .btn-primary:hover{opacity:0.85;}
+  .btn-ghost{border-color:var(--line); color:var(--ink);}
+  .btn-ghost:hover{border-color:var(--ink-soft);}
+  .cta-row{display:flex; gap:12px; flex-wrap:wrap;}
+
+  /* hero */
+  .hero{padding:88px 0 56px;}
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:13px; font-weight:600; letter-spacing:.02em;
+    color:var(--ink-soft); background:var(--bg-alt);
+    border:1px solid var(--line); border-radius:999px; padding:6px 14px;
+    margin-bottom:24px;
+  }
+  .eyebrow .dot{width:7px; height:7px; border-radius:50%; background:var(--accent);}
+  h1{
+    font-size:clamp(40px, 6.4vw, 74px);
+    line-height:1.02; letter-spacing:-0.03em; font-weight:800;
+    margin:0 0 20px;
+  }
+  h1 em{font-style:normal; color:var(--accent);}
+  .lede{font-size:clamp(17px, 2vw, 21px); color:var(--ink-soft); max-width:640px; margin:0 0 32px;}
+  .hero-figure{
+    margin-top:56px; border-radius:var(--radius); overflow:hidden;
+    border:1px solid var(--line); box-shadow:var(--shadow);
+  }
+  .hero-caption{margin-top:14px; font-size:13.5px; color:var(--ink-soft); text-align:center;}
+  .stat-row{display:flex; flex-wrap:wrap; gap:10px; margin-top:36px;}
+  .pill{
+    font-size:12.5px; font-weight:600; color:var(--ink-soft);
+    border:1px solid var(--line); border-radius:999px; padding:6px 12px;
+    background:var(--bg-alt);
+  }
+
+  section{padding:72px 0;}
+  .section-head{max-width:680px; margin:0 0 44px;}
+  .kicker{font-size:13px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); margin:0 0 12px;}
+  h2{font-size:clamp(28px,3.6vw,42px); letter-spacing:-0.02em; font-weight:800; margin:0 0 14px;}
+  .section-sub{color:var(--ink-soft); font-size:17px; margin:0;}
+
+  .divider{border:none; border-top:1px solid var(--line); margin:0;}
+
+  /* video */
+  .video-frame{
+    position:relative; width:100%; padding-top:56.25%;
+    border-radius:var(--radius); overflow:hidden; border:1px solid var(--line);
+    box-shadow:var(--shadow); background:#000;
+  }
+  .video-frame iframe{position:absolute; inset:0; width:100%; height:100%; border:0;}
+
+  /* narrative */
+  .story{font-size:18px; color:var(--ink-soft); max-width:760px;}
+  .story b{color:var(--ink); font-weight:700;}
+  .point-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:40px;}
+  .point{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:26px; box-shadow:var(--shadow);}
+  .point .num{font-size:13px; font-weight:700; color:var(--accent); margin-bottom:10px;}
+  .point h3{margin:0 0 8px; font-size:17px; letter-spacing:-0.01em;}
+  .point p{margin:0; font-size:14.5px; color:var(--ink-soft);}
+
+  /* pipeline */
+  .pipeline{display:flex; flex-direction:column; gap:0; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; background:var(--card); box-shadow:var(--shadow);}
+  .stage{display:grid; grid-template-columns:64px 200px 1fr; gap:20px; align-items:start; padding:22px 26px; border-bottom:1px solid var(--line);}
+  .stage:last-child{border-bottom:none;}
+  .stage.improve{background:var(--bg-alt);}
+  .stage .idx{font-size:22px; font-weight:800; color:var(--accent);}
+  .stage h4{margin:0; font-size:16px; letter-spacing:-0.01em;}
+  .stage p{margin:4px 0 0; font-size:14.5px; color:var(--ink-soft);}
+
+  /* gallery */
+  .gallery{display:grid; grid-template-columns:repeat(2,1fr); gap:20px;}
+  .shot{border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; background:var(--card); box-shadow:var(--shadow);}
+  .shot img{width:100%; height:auto;}
+  .shot figcaption{padding:16px 18px; font-size:14px; color:var(--ink-soft);}
+  .shot figcaption b{color:var(--ink); display:block; margin-bottom:3px; font-size:14.5px;}
+  figure{margin:0;}
+
+  /* features */
+  .feature-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden;}
+  .feature{background:var(--card); padding:26px 28px;}
+  .feature h3{margin:0 0 8px; font-size:16px; letter-spacing:-0.01em;}
+  .feature h3::before{content:"—"; color:var(--accent); margin-right:8px;}
+  .feature p{margin:0; font-size:14.5px; color:var(--ink-soft);}
+
+  /* stack */
+  .stack-row{display:flex; flex-wrap:wrap; gap:10px;}
+  .chip{font-size:13.5px; font-weight:600; padding:8px 14px; border-radius:10px; background:var(--bg-alt); border:1px solid var(--line);}
+
+  /* quickstart */
+  .quickstart{
+    background:var(--ink); color:var(--bg); border-radius:24px; padding:52px;
+    display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center;
+  }
+  .quickstart h2{color:var(--bg);}
+  .quickstart p{color:color-mix(in srgb, var(--bg) 70%, transparent); font-size:16px;}
+  pre{
+    background:color-mix(in srgb, var(--ink) 60%, black 20%);
+    color:#d8f0da; padding:20px 22px; border-radius:14px; overflow-x:auto;
+    font-size:13.5px; line-height:1.7; margin:0;
+    border:1px solid color-mix(in srgb, var(--bg) 15%, transparent);
+  }
+  .quickstart .btn-primary{background:var(--bg); color:var(--ink);}
+
+  footer{padding:48px 0 64px; border-top:1px solid var(--line);}
+  .footer-inner{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;}
+  .footer-inner .logo{opacity:.85;}
+  .credit{font-size:13.5px; color:var(--ink-soft);}
+
+  @media (max-width:860px){
+    .point-grid{grid-template-columns:1fr;}
+    .gallery{grid-template-columns:1fr;}
+    .feature-grid{grid-template-columns:1fr;}
+    .stage{grid-template-columns:40px 1fr; }
+    .stage .idx{grid-row:1;}
+    .stage h4{grid-column:2;}
+    .stage p{grid-column:2;}
+    .quickstart{grid-template-columns:1fr; padding:32px;}
+    nav.links{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="#top" class="logo" aria-label="Visibel"></a>
+    <nav class="links">
+      <a href="#demo">Demo</a>
+      <a href="#how-it-works">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#quickstart">Quick start</a>
+    </nav>
+    <a class="btn btn-primary" href="https://github.com/Joevonlong/Visibel--Online-marketing-Coach/tree/main/code/media-ad-coach" target="_blank" rel="noopener">View on GitHub</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="top">
+    <div class="wrap">
+      <span class="eyebrow"><span class="dot"></span>Built at {Tech: Europe} × Almedia — "The Summer Lock-In", Berlin, July 2026</span>
+      <h1>From zero <em>to hero.</em></h1>
+      <p class="lede">Visibel audits how customers actually see a local business online — website, Google Maps listing, directory profile — then rewrites and re-illustrates it in one click.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#demo">Watch the demo</a>
+        <a class="btn btn-ghost" href="https://github.com/Joevonlong/Visibel--Online-marketing-Coach/tree/main/code/media-ad-coach" target="_blank" rel="noopener">Read the source →</a>
+      </div>
+      <div class="stat-row">
+        <span class="pill">TypeScript 5</span>
+        <span class="pill">Next.js 15.5</span>
+        <span class="pill">React 19.1</span>
+        <span class="pill">519 tests passing</span>
+      </div>
+      <figure class="hero-figure">
+        <img src="assets/hero.jpg" alt="Split view: the audited site today next to the Visibel-generated optimized page" />
+      </figure>
+      <p class="hero-caption">The recorded demo audit — a REPLAY of a real LIVE run, republished under a fictional business persona. Left: what customers see today. Right: the page Visibel wrote and illustrated in one click.</p>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section id="demo">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">See it work</p>
+        <h2>Two minutes, one real audit.</h2>
+        <p class="section-sub">Three links in, a visibility score and a rebuilt page out — watch the full run end to end.</p>
+      </div>
+      <div class="video-frame">
+        <iframe src="https://www.youtube-nocookie.com/embed/VYXuDihgCFo" title="Visibel demo" allow="accelerate-download; encrypted-media; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">What it does</p>
+        <h2>One shot at a first impression.</h2>
+      </div>
+      <p class="story">A plumber in Berlin has one shot at a first impression: a Maps listing with no hours and no photos, a website from 2009, and three blurry pictures of a wall. They know it looks bad. They do not know <b>what</b> to fix, in what order, or how the fixed version would look.</p>
+      <p class="story">Visibel takes three links — website, Google Maps, directory listing — and returns a <b>visibility score out of 100</b>, backed by the exact quotes and photos costing the business trust. Every generated pixel is labelled. Every failed provider call is shown as a failure, never quietly replaced with a fixture.</p>
+      <div class="point-grid">
+        <div class="point">
+          <div class="num">01</div>
+          <h3>Two AI experts read it like a customer</h3>
+          <p>A Copy Strategist scores the words. A Visual Director scores every photo. Both run in parallel, structured-output only.</p>
+        </div>
+        <div class="point">
+          <div class="num">02</div>
+          <h3>A rubric, never a model, computes the score</h3>
+          <p>Pure TypeScript turns sub-scores into totals, bands and a ranked list of what to fix — reproducible and unit-testable.</p>
+        </div>
+        <div class="point">
+          <div class="num">03</div>
+          <h3>One button rewrites everything</h3>
+          <p>Copy, layout and missing photography are regenerated together, and the business sees its own optimized page beside the real one.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section id="how-it-works">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">How it works</p>
+        <h2>Five stages, one honest pipeline.</h2>
+        <p class="section-sub">LIVE and REPLAY run the same orchestration code path and the same progress steps — replay only swaps evidence and model calls for a recorded fixture.</p>
+      </div>
+      <div class="pipeline">
+        <div class="stage">
+          <div class="idx">1</div>
+          <h4>Evidence</h4>
+          <p>Cheerio fetch with a Tavily extract fallback, a Tavily findability search, a Playwright read of the Maps listing, and a sharp-normalized image harvest.</p>
+        </div>
+        <div class="stage">
+          <div class="idx">2</div>
+          <h4>Experts</h4>
+          <p>Two parallel structured-output calls: a Copy Strategist scoring text (T1–T8) and a Visual Director scoring every photo (I1–I6).</p>
+        </div>
+        <div class="stage">
+          <div class="idx">3</div>
+          <h4>Rubric</h4>
+          <p>Pure TypeScript computes every total, band and priority. Models return sub-scores; they never compute a number.</p>
+        </div>
+        <div class="stage">
+          <div class="idx">4</div>
+          <h4>Synthesis</h4>
+          <p>One call writes the prose — structurally incapable of changing a score, since its schema has no score field.</p>
+        </div>
+        <div class="stage">
+          <div class="idx">5</div>
+          <h4>Persist</h4>
+          <p>Report, channels and assets are written to SQLite behind one frozen contract in <code>lib/schemas.ts</code>.</p>
+        </div>
+        <div class="stage improve">
+          <div class="idx">→</div>
+          <h4>Improve — "Do It All For You"</h4>
+          <p>Per-channel rewrites and gpt-image-2 concept photos stream into the open report over SSE; the Before/After preview assembles from what actually worked.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">Walkthrough</p>
+        <h2>Every screen, a real run.</h2>
+      </div>
+      <div class="gallery">
+        <figure class="shot">
+          <img src="assets/intake.png" alt="Intake form: brand name, business type quick-picks, links" />
+          <figcaption><b>1 · Show us what customers see</b>Business basics plus at least one link, text sample, or image. Missing details become findings, not errors.</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/score.png" alt="Report header: visibility score 55 out of 100, At Risk" />
+          <figcaption><b>2 · Get a score you can argue with</b>One number, two lanes, every criterion weighted and shown. Exportable as a PDF report.</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/gbp.jpg" alt="Google Business Profile card with live-from-Google fields and MISSING flags" />
+          <figcaption><b>3 · Channel-by-channel diagnosis</b>The Maps listing is read live and rebuilt as a mockup — present fields ticked, missing ones flagged <code>MISSING</code>, unprovable things left <code>NOT VERIFIED</code>.</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/fixes.png" alt="Website channel: live capture next to per-channel improvement cards" />
+          <figcaption><b>4 · Fix it in one click</b>Every weakness is a card with a concrete fix. "Do It All For You" runs the whole page: rewrites, images, layout.</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/before.png" alt="Before: what the audit read from the site (replay fallback view)" />
+          <figcaption><b>Before</b>The replay fallback view; a LIVE run shows a pixel-true Playwright capture of the site here.</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/after.jpg" alt="After: generated page with brand wordmark hero and AI concept photography" />
+          <figcaption><b>After</b>Brand name leads, one promise, one call to action, real trade photography.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section id="features">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">Key features</p>
+        <h2>Built to be checked, not trusted blindly.</h2>
+      </div>
+      <div class="feature-grid">
+        <div class="feature">
+          <h3>Live Google Business Profile corroboration</h3>
+          <p>A bare Maps link is read with Playwright; real fields are ticked "from Google", absent ones flagged <code>MISSING</code>, anything unprovable stays <code>NOT VERIFIED</code>.</p>
+        </div>
+        <div class="feature">
+          <h3>Deterministic rubric engine</h3>
+          <p><code>lib/rubric.ts</code> owns every number. Structured Outputs enforce the model schema server-side — a bad value, never a bad shape.</p>
+        </div>
+        <div class="feature">
+          <h3>One-click full-page optimization</h3>
+          <p>A single CTA runs every channel with live per-item progress, partial-failure recovery, and no all-or-nothing blocking.</p>
+        </div>
+        <div class="feature">
+          <h3>Async streamed image generation</h3>
+          <p>The report completes first; gpt-image-2 images land in the open page as they finish, with a partial frame shown mid-generation.</p>
+        </div>
+        <div class="feature">
+          <h3>Image semantics, not just pixels</h3>
+          <p>Harvested and generated images are classified by content category and filled against per-trade composition quotas — the gallery never repeats one photo.</p>
+        </div>
+        <div class="feature">
+          <h3>Honest degradation</h3>
+          <p>A Tavily outage or an OpenAI error surfaces as an error chip and an <code>ASSUMPTION</code>-labelled finding — never silently substituted content.</p>
+        </div>
+        <div class="feature">
+          <h3>Zero-key demo path</h3>
+          <p><code>DEMO_MODE=replay</code> runs the whole flow from a recorded LIVE audit: no network, no keys, same UI, permanent <code>REPLAY SAMPLE</code> badge.</p>
+        </div>
+        <div class="feature">
+          <h3>PDF export & shareable preview</h3>
+          <p>The persisted evidence exports as an A4 report; the optimized page includes a URL-addressable Services subpage.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">Under the hood</p>
+        <h2>Mature stack, no glue-code magic.</h2>
+      </div>
+      <div class="stack-row">
+        <span class="chip">Next.js 15 · App Router</span>
+        <span class="chip">React 19</span>
+        <span class="chip">TypeScript 5</span>
+        <span class="chip">Tailwind CSS v4</span>
+        <span class="chip">SQLite · better-sqlite3</span>
+        <span class="chip">OpenAI SDK · gpt-image-2</span>
+        <span class="chip">Tavily search</span>
+        <span class="chip">Cognee memory</span>
+        <span class="chip">Playwright</span>
+        <span class="chip">Vitest · 519 tests</span>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section id="quickstart">
+    <div class="wrap">
+      <div class="quickstart">
+        <div>
+          <p class="kicker" style="color:var(--accent)">Quick start</p>
+          <h2>Try it with zero API keys.</h2>
+          <p>Replay reads a truthful recording of a completed LIVE audit — zero network calls, zero keys, and a REPLAY SAMPLE badge on every screen that says so.</p>
+          <div class="cta-row" style="margin-top:20px;">
+            <a class="btn btn-primary" href="https://github.com/Joevonlong/Visibel--Online-marketing-Coach/tree/main/code/media-ad-coach" target="_blank" rel="noopener">Clone the repo →</a>
+          </div>
+        </div>
+        <pre><code>pnpm install
+pnpm exec playwright install chromium
+cp .env.example .env
+
+# no keys? everything still runs:
+DEMO_MODE=replay pnpm dev
+# → http://localhost:3000</code></pre>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap footer-inner">
+    <a href="#top" class="logo" aria-label="Visibel"></a>
+    <p class="credit">Built at {Tech: Europe} × Almedia — "The Summer Lock-In", Berlin, July 2026 · <a href="https://github.com/Joevonlong/Visibel--Online-marketing-Coach/tree/main/code/media-ad-coach" target="_blank" rel="noopener" style="text-decoration:underline;">Source on GitHub</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
